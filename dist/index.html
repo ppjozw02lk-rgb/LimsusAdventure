@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Limsus Adventure</title>
+  <meta name="description" content="Limsus Adventure - Retro 1-bit style Coin Clash RPG with open world exploration, mystic shop, and arena battles." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <script type="module" crossorigin src="/assets/index-FOSrtAyU.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-SBzJu733.css">
+</head>
+
+<body>
+  <div id="game-app">
+
+    <!-- ============================================== -->
+    <!-- RETRO 1-BIT STARFIELD & MAIN MENU SCREEN       -->
+    <!-- ============================================== -->
+    <canvas id="menu-stars-canvas"></canvas>
+
+    <div id="main-menu">
+      <div class="retro-menu-container">
+        <!-- Top Series Header Box (matching reference image) -->
+        <div class="retro-header-box">
+          <span>RESISTANCE SERIES</span>
+        </div>
+
+        <!-- 3D Pixel Art Title Logo (LIMSUS ADVENTURE) -->
+        <div class="retro-title-logo-wrapper">
+          <img src="/assets/limsus_title_logo-D5gpyaZO.jpg" alt="LIMSUS ADVENTURE" class="retro-title-logo-img" />
+        </div>
+
+        <!-- Subtitles -->
+        <div class="retro-subtitle-version">ALPHA VERSION</div>
+        <div class="retro-subtitle-tagline">RESIST THROUGH TIME!</div>
+
+        <!-- Retro Menu Options -->
+        <nav class="retro-menu-nav">
+          <button id="btn-menu-play" class="retro-menu-btn selected" data-index="0">
+            <span class="btn-dot">·</span>PLAY<span class="btn-dot">·</span>
+          </button>
+          <button id="btn-menu-options" class="retro-menu-btn" data-index="1">
+            <span class="btn-dot">·</span>OPTIONS<span class="btn-dot">·</span>
+          </button>
+          <button id="btn-menu-instructions" class="retro-menu-btn" data-index="2">
+            <span class="btn-dot">·</span>INSTRUCTIONS<span class="btn-dot">·</span>
+          </button>
+          <button id="btn-menu-credits" class="retro-menu-btn" data-index="3">
+            <span class="btn-dot">·</span>CREDITS<span class="btn-dot">·</span>
+          </button>
+        </nav>
+
+        <!-- Footer Info -->
+        <div class="retro-menu-footer">
+          <div>[▲/▼] or [W/S] SELECT &nbsp;&nbsp; [ENTER] or [SPACE] START</div>
+          <div class="retro-audio-tag">🎵 BGM: Gurren Lagann Eyecatch Collection</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- OPTIONS SCREEN                                 -->
+    <!-- ============================================== -->
+    <div id="options-screen" class="submenu-screen hidden">
+      <div class="retro-modal-panel">
+        <div class="retro-modal-header">
+          <h2>== OPTIONS ==</h2>
+          <button id="btn-options-back" class="retro-btn">· BACK ·</button>
+        </div>
+        <div class="submenu-body">
+          <div class="option-group">
+            <h3>🔊 Audio</h3>
+            <div class="option-row">
+              <label for="opt-music-vol">BGM Volume</label>
+              <input type="range" id="opt-music-vol" min="0" max="100" value="60" class="option-slider" />
+              <span id="opt-music-vol-val" class="option-val">60%</span>
+            </div>
+            <div class="option-row">
+              <label for="opt-sfx-vol">SFX Volume</label>
+              <input type="range" id="opt-sfx-vol" min="0" max="100" value="80" class="option-slider" />
+              <span id="opt-sfx-vol-val" class="option-val">80%</span>
+            </div>
+            <div class="option-row">
+              <label>Mute All</label>
+              <button id="opt-mute-toggle" class="option-toggle-btn">OFF</button>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <h3>📺 Display & Retro FX</h3>
+            <div class="option-row">
+              <label>CRT Scanlines</label>
+              <button id="opt-crt-toggle" class="option-toggle-btn">OFF</button>
+            </div>
+            <div class="option-row">
+              <label>Screen Shake</label>
+              <button id="opt-shake-toggle" class="option-toggle-btn active">ON</button>
+            </div>
+            <div class="option-row">
+              <label>Pixel Stars</label>
+              <button id="opt-particles-toggle" class="option-toggle-btn active">ON</button>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <h3>🎮 Controls Guide</h3>
+            <div class="controls-info">
+              <p>• <strong>MOVE:</strong> W / A / S / D or Arrow Keys or Click Map</p>
+              <p>• <strong>INTERACT:</strong> [E] or Spacebar</p>
+              <p>• <strong>BATTLE:</strong> Limbus-style Coin Clash Power</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- CREDITS SCREEN (Blank / Creator Placeholder)   -->
+    <!-- ============================================== -->
+    <div id="credits-screen" class="submenu-screen hidden">
+      <div class="retro-modal-panel">
+        <div class="retro-modal-header">
+          <h2>== CREDITS ==</h2>
+          <button id="btn-credits-back" class="retro-btn">· BACK ·</button>
+        </div>
+        <div class="submenu-body credits-body">
+          <div class="credits-section-title">PRODUCED & CREATED BY</div>
+          
+          <!-- Blank Creator Area (as requested) -->
+          <div class="credits-blank-page">
+            <div class="retro-blinking-cursor">[ _ ]</div>
+            <p class="credits-placeholder-text">AWAITING CREATOR NAMES</p>
+            <div class="credits-sub-note">(Blank - Ready for Team Credits)</div>
+          </div>
+
+          <div class="credits-meta-row">
+            <span>GAME: LIMSUS ADVENTURE</span>
+            <span>BGM: GURREN LAGANN EYECATCH</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- INSTRUCTIONS SCREEN                            -->
+    <!-- ============================================== -->
+    <div id="instructions-screen" class="submenu-screen hidden">
+      <div class="retro-modal-panel">
+        <div class="retro-modal-header">
+          <h2>== HOW TO PLAY ==</h2>
+          <button id="btn-instructions-back" class="retro-btn">· BACK ·</button>
+        </div>
+        <div class="submenu-body">
+          <div class="option-group">
+            <h3>🗺️ World Map</h3>
+            <p class="instruction-p">🔴 <strong>Red Circle:</strong> Spawn point & Flame Rift. Walk here to restore HP!</p>
+            <p class="instruction-p">✨ <strong>Magic Pond:</strong> Down in the marsh. Buy Charge & Slay skills!</p>
+            <p class="instruction-p">🟡 <strong>Yellow Circles:</strong> Arena champions. Walk up to challenge them!</p>
+          </div>
+          <div class="option-group">
+            <h3>🪙 Coin Clash Combat</h3>
+            <p class="instruction-p">• Attack to enter a Clash against the opponent.</p>
+            <p class="instruction-p">• Coins flip: Heads increases Clash Power!</p>
+            <p class="instruction-p">• Higher total Clash Power wins and strikes the enemy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- GAME WORLD (Hidden until PLAY is clicked)      -->
+    <!-- ============================================== -->
+    <div id="game-world" class="hidden">
+
+      <!-- 2D Exploration Canvas -->
+      <canvas id="game-canvas"></canvas>
+
+      <!-- MAP EXPLORATION HUD -->
+      <header id="map-hud">
+        <!-- Player Mini Status Card -->
+        <div class="player-hud-card glass-panel">
+          <div class="avatar-box">
+            <img src="/assets/LL-DD38HwwD.png" alt="LL-01" class="avatar-img" />
+            <span class="avatar-badge">Lv.25</span>
+          </div>
+          <div class="player-hud-info">
+            <div class="name-row">
+              <span class="player-name">LL-01 Valkyrie</span>
+              <span class="gold-badge">🪙 <span id="hud-player-gold">50G</span></span>
+            </div>
+            <div class="hp-bar-container">
+              <span class="hp-tag">HP</span>
+              <div class="hp-track">
+                <div id="hud-player-hp-bar" class="hp-fill"></div>
+              </div>
+              <span id="hud-player-hp-text" class="hp-numbers">200 / 200</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quest / Map Objectives Banner -->
+        <div class="objective-banner glass-panel">
+          <div class="banner-title">⚔️ OBJECTIVE</div>
+          <div class="banner-desc">Challenge the 3 Yellow Arena Champions & Upgrade at Mystic Pond!</div>
+        </div>
+
+        <!-- Quick Utility Controls -->
+        <div class="hud-controls glass-panel">
+          <button id="hud-potions-count" class="icon-btn" title="Potions Available">🧪 2</button>
+          <button id="btn-sound-toggle" class="icon-btn" title="Toggle Sound"><span id="sound-icon">🔊</span></button>
+          <button id="btn-help-toggle" class="icon-btn" title="Guide & Help">❓</button>
+          <button id="btn-back-to-menu" class="icon-btn" title="Back to Menu">🏠</button>
+        </div>
+      </header>
+
+      <!-- Contextual Interaction Prompt (Floats near bottom center) -->
+      <div id="interaction-prompt" class="interaction-toast hidden glass-panel">
+        <strong>Mystic Pond Shop</strong>
+        <span>Press [E] or Tap to Interact</span>
+      </div>
+
+      <!-- Toast Notification Notification Bar -->
+      <div id="game-toast" class="toast-popup hidden"></div>
+
+      <!-- Mobile On-Screen Controls -->
+      <div id="mobile-controls">
+        <div class="dpad-container">
+          <button class="dpad-btn dpad-up" data-dir="up">▲</button>
+          <button class="dpad-btn dpad-left" data-dir="left">◀</button>
+          <button class="dpad-btn dpad-center">●</button>
+          <button class="dpad-btn dpad-right" data-dir="right">▶</button>
+          <button class="dpad-btn dpad-down" data-dir="down">▼</button>
+        </div>
+        <button id="mobile-interact-btn" class="mobile-action-btn hidden">INTERACT [E]</button>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- MYSTIC POND SHOP MODAL                         -->
+      <!-- ============================================== -->
+      <div id="shop-modal" class="modal-backdrop hidden">
+        <div class="shop-panel modal-card glass-panel">
+          <div class="modal-header shop-header">
+            <div class="header-left">
+              <span class="rune-icon">✨</span>
+              <h2>Mystic Pond Sanctuary</h2>
+            </div>
+            <div class="header-right">
+              <div class="shop-wallet">Balance: 🪙 <span id="shop-gold-amount">50G</span></div>
+              <button id="btn-close-shop" class="close-modal-btn">✕</button>
+            </div>
+          </div>
+
+          <div class="shop-content">
+            <p class="shop-subtitle">Infuse ancient arcane runes to awaken devastating combat skills!</p>
+
+            <div class="shop-items-grid">
+              <!-- Item 1: Skill Charge -->
+              <div class="shop-item-card">
+                <div class="item-icon-box skill-charge-icon">⚡</div>
+                <div class="item-info">
+                  <div class="item-title-row">
+                    <h3>Skill: Charge</h3>
+                    <span class="item-price">20G</span>
+                  </div>
+                  <div class="item-specs">
+                    <span class="spec-coin">🪙 Rolls 10 Coins</span>
+                    <span class="spec-dmg">💥 20 DMG</span>
+                  </div>
+                  <p class="item-desc">Channel high-density kinetic energy into an overcharged thrust.</p>
+                </div>
+                <button id="btn-buy-charge" class="btn btn-buy">BUY (20G)</button>
+              </div>
+
+              <!-- Item 2: Skill Slay -->
+              <div class="shop-item-card featured">
+                <div class="featured-badge">ULTIMATE</div>
+                <div class="item-icon-box skill-slay-icon">⚔️</div>
+                <div class="item-info">
+                  <div class="item-title-row">
+                    <h3>Skill: Slay</h3>
+                    <span class="item-price">50G</span>
+                  </div>
+                  <div class="item-specs">
+                    <span class="spec-coin">🪙 Rolls 15 Coins</span>
+                    <span class="spec-dmg">💥 30 DMG</span>
+                  </div>
+                  <p class="item-desc">A merciless execution blade that commands up to 15 clash coins!</p>
+                </div>
+                <button id="btn-buy-slay" class="btn btn-buy featured-btn">BUY (50G)</button>
+              </div>
+
+              <!-- Item 3: Vitality Potion -->
+              <div class="shop-item-card">
+                <div class="item-icon-box potion-icon">🧪</div>
+                <div class="item-info">
+                  <div class="item-title-row">
+                    <h3>Vitality Potion</h3>
+                    <span class="item-price">10G</span>
+                  </div>
+                  <div class="item-specs">
+                    <span class="spec-heal">❤️ Restores +100 HP</span>
+                  </div>
+                  <p class="item-desc">Brewed from glowing swamp flora to instantly restore health.</p>
+                </div>
+                <button id="btn-buy-potion" class="btn btn-buy">BUY (10G)</button>
+              </div>
+
+              <!-- Item 4: Spring Blessing -->
+              <div class="shop-item-card free-rest">
+                <div class="item-icon-box spring-icon">🌊</div>
+                <div class="item-info">
+                  <div class="item-title-row">
+                    <h3>Spring Blessing</h3>
+                    <span class="item-price free">FREE</span>
+                  </div>
+                  <div class="item-specs">
+                    <span class="spec-heal">🌟 Full HP Recovery</span>
+                  </div>
+                  <p class="item-desc">Bathe in the arcane waters of the pond to cleanse all wounds.</p>
+                </div>
+                <button id="btn-pond-rest" class="btn btn-outline-cyan">COMMUNE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- NPC CHALLENGE CONFIRMATION MODAL               -->
+      <!-- ============================================== -->
+      <div id="challenge-modal" class="modal-backdrop hidden">
+        <div class="challenge-panel modal-card glass-panel">
+          <div class="challenge-header">
+            <span class="swords-icon">⚔️</span>
+            <div>
+              <h2 id="challenge-npc-name">Ronin Kai</h2>
+              <span id="challenge-npc-title" class="npc-subtitle">Verdant Forest Guard</span>
+            </div>
+          </div>
+          <div class="challenge-body">
+            <div id="challenge-npc-dialogue" class="npc-speech">
+              "Looking for a fight? Let us see whose coin flips ring truest!"
+            </div>
+            <div class="npc-stats-badge" id="challenge-npc-stats">
+              HP: 200 | Skills: Punch (5c), Kick (7c)
+            </div>
+          </div>
+          <div class="challenge-actions">
+            <button id="btn-challenge-fight" class="btn btn-primary-clash">ENTER BATTLE!</button>
+            <button id="btn-challenge-cancel" class="btn btn-secondary">DECLINE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- COMBAT ARENA SCREEN (Pokemon View + Clash UI)  -->
+      <!-- ============================================== -->
+      <div id="combat-overlay" class="hidden">
+        <!-- Retro Battle Arena Background matching uicombat.png -->
+        <div class="combat-scene-bg">
+          <div class="pokemon-sky"></div>
+          <div class="pokemon-grass-field">
+            <div class="grass-stripe stripe-1"></div>
+            <div class="grass-stripe stripe-2"></div>
+            <div class="grass-stripe stripe-3"></div>
+          </div>
+        </div>
+
+        <!-- TOP SECTION -->
+        <div class="combat-top-row">
+          <!-- TOP-LEFT: ENEMY STATUS PLATE (uicombat.png style) -->
+          <div class="status-plate enemy-status-plate">
+            <div class="status-title-row">
+              <span id="enemy-name-text" class="combatant-name">Brawler Ignis</span>
+              <span class="gender-icon">♂</span>
+              <span id="enemy-level-text" class="combatant-level">Lv. 24</span>
+            </div>
+            <div class="combat-hp-box">
+              <span class="hp-badge">HP</span>
+              <div class="hp-track">
+                <div id="enemy-hp-bar" class="hp-fill"></div>
+              </div>
+            </div>
+            <div class="hp-numeric-row">
+              <span id="enemy-hp-text" class="hp-numbers">200 / 200</span>
+            </div>
+          </div>
+
+          <!-- TOP-RIGHT: ENEMY STAGE & SPRITE + OVERHEAD CLASH BANNER -->
+          <div class="combat-stage enemy-stage">
+            <!-- Overhead Clash Banner (clashui.png style) -->
+            <div id="enemy-clash-banner" class="clash-ui-overlay enemy-clash hidden">
+              <div class="clash-coins-row" id="enemy-coins-container"></div>
+              <div class="clash-banner-card">
+                <div class="clash-ribbon">
+                  <span id="enemy-clash-skill-name">PUNCH</span>
+                </div>
+                <div class="clash-octagon-badge">
+                  <span class="clash-bonus-tag">+1</span>
+                  <span id="enemy-clash-val" class="clash-val-num">3</span>
+                  <span class="clash-type-icon">💥</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enemy Pedestal & Sprite -->
+            <div class="pedestal-disc enemy-disc"></div>
+            <div id="combat-enemy-sprite" class="battle-sprite enemy-battle-sprite">
+              <!-- Pixel Art Combatant Sprite -->
+              <div class="enemy-visual-wrapper"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM SECTION -->
+        <div class="combat-mid-row">
+          <!-- BOTTOM-LEFT: PLAYER STAGE & SPRITE + OVERHEAD CLASH BANNER -->
+          <div class="combat-stage player-stage">
+            <!-- Overhead Clash Banner (clashui.png style) -->
+            <div id="player-clash-banner" class="clash-ui-overlay player-clash hidden">
+              <div class="clash-coins-row" id="player-coins-container"></div>
+              <div class="clash-banner-card">
+                <div class="clash-ribbon player-ribbon">
+                  <span id="player-clash-skill-name">SLAY</span>
+                </div>
+                <div class="clash-octagon-badge player-badge">
+                  <span class="clash-bonus-tag">+1</span>
+                  <span id="player-clash-val" class="clash-val-num">4</span>
+                  <span class="clash-type-icon">⚔️</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Player Pedestal & Sprite (LL.png) -->
+            <div class="pedestal-disc player-disc"></div>
+            <div id="combat-player-sprite" class="battle-sprite player-battle-sprite">
+              <img src="/assets/LL-DD38HwwD.png" alt="LL-01" class="player-combat-img" />
+              <div class="player-battle-glow"></div>
+            </div>
+          </div>
+
+          <!-- BOTTOM-RIGHT: PLAYER STATUS PLATE (uicombat.png style) -->
+          <div class="status-plate player-status-plate">
+            <div class="status-title-row">
+              <span class="combatant-name">LL-01</span>
+              <span class="gender-icon female">♀</span>
+              <span class="combatant-level">Lv. 25</span>
+            </div>
+            <div class="combat-hp-box">
+              <span class="hp-badge">HP</span>
+              <div class="hp-track">
+                <div id="player-hp-bar" class="hp-fill"></div>
+              </div>
+            </div>
+            <div class="hp-numeric-row">
+              <span id="player-hp-text" class="hp-numbers">200 / 200</span>
+            </div>
+            <div class="exp-track">
+              <div class="exp-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM COMMAND PANEL (Pokemon Layout) -->
+        <footer id="combat-bottom-dock">
+          <!-- Dialogue & Combat Log Prompt Box -->
+          <div id="combat-dialogue" class="combat-dialogue-box">
+            <span>What will LL-01 do?</span>
+          </div>
+
+          <!-- Action Menu -->
+          <div id="combat-actions" class="combat-actions-grid">
+            <button id="btn-attack-menu" class="btn-battle-action action-attack">
+              <span class="action-icon">⚔️</span>
+              <span class="action-label">ATTACK (SKILLS)</span>
+            </button>
+            <button id="btn-use-potion" class="btn-battle-action action-item">
+              <span class="action-icon">🧪</span>
+              <span class="action-label">RESTORE HP</span>
+            </button>
+            <button id="btn-run" class="btn-battle-action action-run">
+              <span class="action-icon">🏃</span>
+              <span class="action-label">FLEE</span>
+            </button>
+          </div>
+
+          <!-- Skill Selection Grid (Hidden initially, shown when Attack is clicked) -->
+          <div id="combat-skills-grid" class="combat-skills-grid hidden">
+            <!-- Dynamically populated with Punch, Kick, Charge, Slay -->
+          </div>
+
+          <button id="btn-back-to-actions" class="btn btn-back hidden">◀ BACK</button>
+        </footer>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- VICTORY MODAL                                  -->
+      <!-- ============================================== -->
+      <div id="victory-modal" class="modal-backdrop hidden">
+        <div class="result-card victory-card glass-panel">
+          <div class="result-badge">VICTORY!</div>
+          <h2>Challenger Defeated!</h2>
+          <p>Your coin flips shattered the opponent's clash power!</p>
+          <div class="reward-box">
+            <span class="reward-label">Battle Spoils:</span>
+            <span id="victory-gold-text" class="reward-val">+45 Gold</span>
+          </div>
+          <button id="btn-victory-claim" class="btn btn-primary-clash">RETURN TO WORLD</button>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- DEFEAT MODAL                                   -->
+      <!-- ============================================== -->
+      <div id="defeat-modal" class="modal-backdrop hidden">
+        <div class="result-card defeat-card glass-panel">
+          <div class="result-badge defeat">DEFEATED</div>
+          <h2>Systems Overheated...</h2>
+          <p>You fell in combat. Emergency teleporting back to Flame Rift checkpoint!</p>
+          <button id="btn-respawn" class="btn btn-respawn">RESPAWN AT RED POINT</button>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- GAME HELP & GUIDE MODAL                        -->
+      <!-- ============================================== -->
+      <div id="help-modal" class="modal-backdrop hidden">
+        <div class="help-card modal-card glass-panel">
+          <div class="modal-header">
+            <h2>Game Guide & Rules</h2>
+            <button id="btn-close-help" class="close-modal-btn">✕</button>
+          </div>
+          <div class="help-content">
+            <div class="help-section">
+              <h3>🗺️ Map Landmarks</h3>
+              <ul>
+                <li><strong>🔴 Red Circle:</strong> Spawn point & Flame Rift. Stand here to heal to full HP!</li>
+                <li><strong>✨ Magic Pond:</strong> The glowing arcane pond at the bottom. Approach to buy <em>Charge</em>
+                  (20G) and <em>Slay</em> (50G)!</li>
+                <li><strong>🟡 Yellow Circles:</strong> Arena champions (Ronin, Shinobi, Brawler). Approach to challenge
+                  them to a fight!</li>
+              </ul>
+            </div>
+            <div class="help-section">
+              <h3>🪙 Coin Clash System (Limbus Company)</h3>
+              <ul>
+                <li>When you attack, both you and the opponent enter a <strong>CLASH</strong>!</li>
+                <li>Coins flip: <strong>Heads (Gold)</strong> increases your Clash Power!</li>
+                <li>The fighter with <strong>Higher Clash Power</strong> wins the clash and dashes forward to deal DMG!
+                </li>
+                <li><strong>Skills:</strong>
+                  <ul>
+                    <li>👊 <strong>Punch:</strong> 5 Coins | 5 DMG</li>
+                    <li>🦵 <strong>Kick:</strong> 7 Coins | 10 DMG</li>
+                    <li>⚡ <strong>Charge:</strong> 10 Coins | 20 DMG (Shop: 20G)</li>
+                    <li>⚔️ <strong>Slay:</strong> 15 Coins | 30 DMG (Shop: 50G)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="help-section">
+              <h3>🎮 Controls</h3>
+              <p>Move: <strong>W/A/S/D</strong> or <strong>Arrow Keys</strong> or <strong>Click / Tap on Map</strong>.</p>
+              <p>Interact: <strong>[E]</strong> or <strong>Spacebar</strong> or <strong>Tap Interact Button</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end #game-world -->
+
+  </div>
+
+  <!-- Script entry point -->
+</body>
+
+</html>
